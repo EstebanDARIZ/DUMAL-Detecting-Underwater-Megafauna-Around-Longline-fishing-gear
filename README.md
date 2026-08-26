@@ -2,7 +2,7 @@
 
 Code accompanying the paper *DUMAL: An Underwater Megafauna Detection Dataset for Sustainable Longline Fisheries*, submitted to the WACV 2027 Evaluation and Dataset Track.
 
-**Dataset:** [https://dataverse.harvard.edu/previewurl.xhtml?token=2da98596-a101-4bd4-b3b8-28a5ac1f458e]
+**Dataset:** [https://dataverse.harvard.edu/previewurl.xhtml?token=2da98596-a101-4bd4-b3b8-28a5ac1f458e](https://dataverse.harvard.edu/previewurl.xhtml?token=2da98596-a101-4bd4-b3b8-28a5ac1f458e)
 
 ## Repository structure
 
