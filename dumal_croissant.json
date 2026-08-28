@@ -1,0 +1,146 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "dct": "http://purl.org/dc/terms/",
+    "rai": "http://mlcommons.org/croissant/RAI/"
+  },
+  "@type": "sc:Dataset",
+  "name": "DUMAL",
+  "description": "DUMAL is a dataset of 60,870 annotated underwater frames (94,101 bounding boxes across nine species) drawn from 55 independent source videos, recorded on an instrumented pelagic longline in the Mediterranean Sea. It documents animal-gear interactions occurring in situ on active longline fishing gear, for training and evaluating object detectors in support of bycatch monitoring and mitigation. Frames are split hermetically at the video level into train, validation, and test pools. Annotation quality is validated through two inter-annotator agreement studies (IoU-based localization agreement and Cohen's kappa classification agreement).",
+  "url": "https://dataverse.harvard.edu/previewurl.xhtml?token=2da98596-a101-4bd4-b3b8-28a5ac1f458e",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "instances_train",
+      "name": "instances_train.json",
+      "description": "COCO-format annotations for the training split.",
+      "contentUrl": "annotations/instances_train.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "instances_val",
+      "name": "instances_val.json",
+      "description": "COCO-format annotations for the validation split.",
+      "contentUrl": "annotations/instances_val.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "instances_test",
+      "name": "instances_test.json",
+      "description": "COCO-format annotations for the test split.",
+      "contentUrl": "annotations/instances_test.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "images",
+      "name": "images",
+      "description": "Annotated video frames (JPEG), referenced by file_name in the COCO annotation files.",
+      "containedIn": { "@id": "instances_train" },
+      "encodingFormat": "image/jpeg",
+      "includes": "images/*.jpg"
+    }
+  ],
+
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "images_record",
+      "name": "images",
+      "description": "One record per annotated frame.",
+      "key": { "@id": "images_record/image_id" },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "images_record/image_id",
+          "name": "image_id",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "images/id" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "images_record/file_name",
+          "name": "file_name",
+          "dataType": "sc:Text",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "images/file_name" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "images_record/width",
+          "name": "width",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "images/width" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "images_record/height",
+          "name": "height",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "images/height" } }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "annotations_record",
+      "name": "annotations",
+      "description": "One record per bounding-box instance. Nine species categories: Squid, Sardine, Ray, Sunfish, Pilot Fish, Shark, JellyFish, Tuna, Mackerel.",
+      "key": { "@id": "annotations_record/annotation_id" },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "annotations_record/annotation_id",
+          "name": "annotation_id",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "annotations/id" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "annotations_record/image_id",
+          "name": "image_id",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "annotations/image_id" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "annotations_record/category_id",
+          "name": "category_id",
+          "dataType": "sc:Integer",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "annotations/category_id" } }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "annotations_record/bbox",
+          "name": "bbox",
+          "description": "[x, y, width, height] in pixels, COCO convention.",
+          "dataType": "sc:Text",
+          "source": { "fileObject": { "@id": "instances_train" }, "extract": { "column": "annotations/bbox" } }
+        }
+      ]
+    }
+  ],
+
+  "rai:dataCollection": "Frames were extracted from underwater video captured by three camera models (Spydro, CanFish CamX, WaterWolf 2.0) mounted directly on the branch lines of an instrumented pelagic longline, deployed off Corsica and in the Gulf of Lions (Mediterranean Sea), aboard chartered vessels during regular commercial fishing operations.",
+  "rai:dataCollectionType": "Physical sensor deployment (underwater cameras fixed on active fishing gear) followed by manual video review. No synthetic or generated data is included.",
+  "rai:dataCollectionTimeframe": "2019-01-01/2025-12-31",
+  "rai:dataPreprocessingProtocol": "The full raw dataset comprises approximately 500 hours of underwater video footage. A marine biology expert manually reviewed the footage using BORIS to identify sequences containing visible animal presence, yielding 229 video clips (approximately 16 hours) retained for annotation.",
+  "rai:dataAnnotationProtocol": "Bounding boxes were drawn by a single primary annotator using a custom tool built around SAM3: an initial box is drawn on the frame where an animal instance first appears, and SAM3, used as a promptable video object tracker, propagates the corresponding segmentation mask across subsequent frames, from which a bounding box is derived at each frame. Species identity for four core target classes was established at the video level by a marine biology expert and team during initial screening; for less common classes, species identification was established through direct consultation with the domain expert.",
+  "rai:dataAnnotationPlatform": "Custom annotation tool built around SAM3 (Segment Anything Model 3), used as a promptable video object tracker.",
+  "rai:machineAnnotationTools": "SAM3 (Segment Anything Model 3) propagates annotator-drawn bounding boxes across subsequent video frames via promptable video object tracking.",
+  "rai:dataAnnotationAnalysis": "Two inter-annotator agreement studies were conducted on purpose-built subsamples. A localization study compared the reference annotator against four independent annotators on a 111-image (170-box) subset, yielding mean IoU of 0.605 (detection-and-localization) and 0.811 (localization-only), within roughly four points of the human agreement ceiling (0.644 / 0.847). A classification study compared the reference annotator against a marine biology domain expert on a 213-frame (415-box) subset, yielding Cohen's kappa = 0.86 (87.8% raw agreement).",
+  "rai:annotationsPerItem": "Each released image was labeled by a single primary annotator. Independent subsamples used for the reliability studies were additionally labeled by four other annotators (localization study) or one domain expert (classification study).",
+  "rai:dataBiases": "Class representation is highly imbalanced, both in raw instance counts and in the number of distinct source videos each class appears in. Frames essentially never contain more than one principal species at a time, so the dataset provides little evidence on detector behavior when multiple species co-occur. The dataset is not deduplicated: frames extracted from the same video are temporally correlated, so instance counts within a class can be dominated by a small number of long clips rather than genuinely independent observations.",
+  "rai:dataLimitations": "Collected exclusively in the Mediterranean Sea (Corsica, Gulf of Lions) on an instrumented pelagic longline. Species composition, gear configuration, and environmental conditions in other longline fisheries may differ; the dataset should not be assumed to generalize to other regions or gear types without further validation.",
+  "rai:personalSensitiveInformation": "None. The dataset exclusively depicts marine animals interacting with fishing gear; no human faces or other personally identifiable imagery are present in any released frame.",
+  "rai:dataUseCases": "Established use case: benchmarking object detection architectures for underwater megafauna, and training or evaluating models to support automated bycatch monitoring. Not validated: deployment as an operational, real-time bycatch-mitigation tool aboard active fishing vessels, or use on fisheries, gear types, or geographic regions other than the Mediterranean pelagic longline context studied here.",
+  "rai:dataSocialImpact": "Intended to support bycatch mitigation and evidence-based management for protected marine species by enabling automated monitoring tools. As with any dataset documenting fishing operations, downstream tools built on it could in principle be repurposed for surveillance of fishing crews rather than animal monitoring; this is a general risk of the data modality rather than a documented incident.",
+  "rai:dataReleaseMaintenancePlan": "The dataset is released as a fixed snapshot accompanying the published paper. No further versions are currently planned."
+}
