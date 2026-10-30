@@ -10,8 +10,8 @@
   "@type": "sc:Dataset",
   "name": "DUMAL",
   "description": "DUMAL is a dataset of 60,870 annotated underwater frames (94,101 bounding boxes across nine species) drawn from 55 independent source videos, recorded on an instrumented pelagic longline in the Mediterranean Sea. It documents animal-gear interactions occurring in situ on active longline fishing gear, for training and evaluating object detectors in support of bycatch monitoring and mitigation. Frames are split hermetically at the video level into train, validation, and test pools. Annotation quality is validated through two inter-annotator agreement studies (IoU-based localization agreement and Cohen's kappa classification agreement).",
-  "url": "https://dataverse.harvard.edu/previewurl.xhtml?token=2da98596-a101-4bd4-b3b8-28a5ac1f458e",
-  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "url": "https://l3i-share.univ-lr.fr/2026DUMAL",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
 
   "distribution": [
