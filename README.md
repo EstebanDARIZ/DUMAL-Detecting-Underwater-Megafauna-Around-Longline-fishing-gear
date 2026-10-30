@@ -5,7 +5,7 @@ Code and dataset for the paper *DUMAL: An Underwater Megafauna Detection Dataset
 **Dataset:** [https://doi.org/10.7910/DVN/QM19AI](https://doi.org/10.7910/DVN/QM19AI) (Harvard Dataverse) · **Project page:** [https://l3i-share.univ-lr.fr/2026DUMAL](https://l3i-share.univ-lr.fr/2026DUMAL)
 
 Esteban Darizcuren-Dreau<sup>1</sup>, Nicolas Sidere<sup>1</sup>, Jean-Christophe Burie<sup>1</sup>, François Poisson<sup>2</sup>
-<sup>1</sup>L3i, La Rochelle Université, France · <sup>2</sup>MARBEC, CNRS, Ifremer, IRD, University of Montpellier, Sète, France
+<sup>1</sup>L3i, La Rochelle Université, France · <sup>2</sup>MARBEC, Univ Montpellier, CNRS, IFREMER, IRD, Montpellier, France
 
 ## Abstract
 
