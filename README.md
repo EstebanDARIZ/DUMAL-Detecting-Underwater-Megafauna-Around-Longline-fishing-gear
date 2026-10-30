@@ -2,7 +2,7 @@
 
 Code and dataset for the paper *DUMAL: An Underwater Megafauna Detection Dataset for Sustainable Longline Fisheries*, accepted at the WACV 2027 Datasets Track.
 
-**Dataset page:** [https://l3i-share.univ-lr.fr/2026DUMAL](https://l3i-share.univ-lr.fr/2026DUMAL)
+**Dataset:** [https://doi.org/10.7910/DVN/QM19AI](https://doi.org/10.7910/DVN/QM19AI) (Harvard Dataverse) · **Project page:** [https://l3i-share.univ-lr.fr/2026DUMAL](https://l3i-share.univ-lr.fr/2026DUMAL)
 
 Esteban Darizcuren-Dreau<sup>1</sup>, Nicolas Sidere<sup>1</sup>, Jean-Christophe Burie<sup>1</sup>, François Poisson<sup>2</sup>
 <sup>1</sup>L3i, La Rochelle Université, France · <sup>2</sup>MARBEC, CNRS, Ifremer, IRD, University of Montpellier, Sète, France
@@ -28,7 +28,39 @@ DUMAL is part of the MEGABIT project. Cameras were mounted on a subset of branch
 
 **Formats:** annotations are provided in COCO JSON (`annotations/instances_<split>.json`, category ids 1–9) and YOLO (`<split>/labels/*.txt`, class ids 0–8, see `data.yaml`). Images come at 1280×720, 1920×1080 or 2560×1440. Frames named `*_bg_*` are background frames with no animal and no annotation. The reduced training sets used in the two ablations are also provided as COCO JSON files.
 
-Download links are on the [dataset page](https://l3i-share.univ-lr.fr/2026DUMAL). Machine-readable metadata are given in [`dumal_croissant.json`](dumal_croissant.json) ([Croissant](http://mlcommons.org/croissant/) format).
+### Download
+
+The dataset (about 13.7 GB) is hosted on Harvard Dataverse: [https://doi.org/10.7910/DVN/QM19AI](https://doi.org/10.7910/DVN/QM19AI). It contains:
+
+- `DUMAL_annotations.zip`: COCO and YOLO annotations, `data.yaml` and ablation splits (~28 MB)
+- `train_images_part001.zip` to `train_images_part005.zip`: 48,006 train images (~11.1 GB)
+- `val_images_part001.zip`: 5,333 val images (~1.2 GB)
+- `test_images_part001.zip`: 7,531 test images (~1.3 GB)
+
+Download all the files into the same directory, then rebuild the dataset folder:
+
+```bash
+unzip DUMAL_annotations.zip
+unzip 'train_images_part*.zip' -d DUMAL/train/images
+unzip val_images_part001.zip -d DUMAL/val/images
+unzip test_images_part001.zip -d DUMAL/test/images
+```
+
+This gives the following structure:
+
+```
+DUMAL/
+├── data.yaml            YOLO configuration and class names
+├── annotations/         instances_{train,val,test}.json (COCO)
+├── train/{images,labels}/
+├── val/{images,labels}/
+├── test/{images,labels}/
+└── ablations/
+    ├── ablation_video/  75% and 50% of video clusters, seeds 1 and 42
+    └── ablation_frame/  one frame kept every N frames (N = 2 to 5)
+```
+
+Machine-readable metadata are given in [`dumal_croissant.json`](dumal_croissant.json) ([Croissant](http://mlcommons.org/croissant/) format).
 
 ## Repository structure
 
